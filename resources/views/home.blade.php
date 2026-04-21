@@ -426,9 +426,9 @@
         ];
         $slideTexts = [
             ['title' => 'Fashion Collection', 'subtitle' => 'Premium styles for every occasion'],
-            ['title' => 'Electronics Hub', 'subtitle' => 'Latest gadgets & tech'],
-            ['title' => 'Home Essentials', 'subtitle' => 'Quality for your space'],
-            ['title' => 'Summer Must-Haves', 'subtitle' => 'Perfect for the season']
+            ['title' => 'Trending Today', 'subtitle' => 'Latest trendy fashion'],
+            ['title' => 'Match Your Outfits', 'subtitle' => 'Quality for your space'],
+            ['title' => 'Todays Collection', 'subtitle' => 'Perfect for your style']
         ];
     @endphp
 
