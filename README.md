@@ -1,10 +1,10 @@
 # NextMart ecommerce-project
-Group 7
-Members:
-Juliet Barbacena
-Patrick mendaro
-Jimmarc Barcenal
+Group 7<br>
+Members:<br>
+Juliet Barbacena<br>
+Patrick mendaro<br>
+Jimmarc Barcenal<br>
 
-Admin Access:
-Username: Admin
+Admin Access: <br>
+Username: Admin <br>
 Password Admin123
