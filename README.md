@@ -7,4 +7,4 @@ Jimmarc Barcenal<br>
 
 Admin Access: <br>
 Username: Admin <br>
-Password Admin123
+Password: Admin123
