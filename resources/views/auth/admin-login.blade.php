@@ -183,7 +183,7 @@
                         <i class="fas fa-user-shield"></i>
                     </div>
                     <h1>Admin Panel Access</h1>
-                    <p>Sign in to manage products, users, featured items, and storefront activity from the NextMart control panel.</p>
+                    <p>Sign in to manage products, users, orders, and storefront activity from the NextMart control panel.</p>
 
                     <ul>
                         <li><i class="fas fa-chart-line"></i> Monitor store insights and activity</li>

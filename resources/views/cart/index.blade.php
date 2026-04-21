@@ -248,10 +248,7 @@
                 </div>
 
                 @if(!$cart->isEmpty())
-                    <form method="POST" action="/cart/checkout" class="mt-3">
-                        @csrf
-                        <button type="submit" class="btn btn-checkout">Proceed to Checkout</button>
-                    </form>
+                    <a href="{{ route('payment.checkout') }}" class="btn btn-checkout mt-3">Proceed to Checkout</a>
                 @else
                     <a href="/products" class="btn btn-outline-dark w-100 mt-3">Start Shopping</a>
                 @endif

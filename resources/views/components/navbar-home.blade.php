@@ -384,10 +384,12 @@
 
         <!-- Navigation Links -->
         <ul class="navbar-links">
+
             <li><a href="/" class="navbar-link {{ url()->current() === url('/') ? 'active' : '' }}">Home</a></li>
             <li><a href="/products" class="navbar-link {{ request()->is('products') || request()->is('products/*') ? 'active' : '' }}">Products</a></li>
-            <li><a href="#about" class="navbar-link">About</a></li>
+            <li><a href="/about" class="navbar-link {{ url()->current() === url('/about') ? 'active' : '' }}">About</a></li>
             <li><a href="#contact" class="navbar-link">Contact</a></li>
+
         </ul>
 
         <!-- Navbar Icons -->

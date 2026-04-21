@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Models\Product;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\ProductController as UserProductController;
 use App\Http\Controllers\Admin\ProductController as AdminProductController;
@@ -26,6 +27,10 @@ Route::get('/', function () {
 
     return view('home', compact('featuredProducts'));
 });
+
+Route::get('/about', function () {
+    return view('about');
+})->name('about');
 
 /*
 |--------------------------------------------------------------------------
@@ -58,7 +63,21 @@ Route::middleware('auth')->group(function () {
     Route::get('/cart', [CartController::class, 'index']);
     Route::post('/cart/add/{id}', [CartController::class, 'add']);
     Route::get('/cart/remove/{id}', [CartController::class, 'remove']);
-    Route::post('/cart/checkout', [CartController::class, 'checkout']);
+
+});
+
+/*
+|--------------------------------------------------------------------------
+| PAYMENT SYSTEM
+|--------------------------------------------------------------------------
+*/
+
+Route::middleware('auth')->group(function () {
+    Route::get('/payment/checkout', [PaymentController::class, 'checkout'])->name('payment.checkout');
+    Route::post('/payment/process', [PaymentController::class, 'processPayment'])->name('payment.process');
+    Route::get('/payment/success/{order}', [PaymentController::class, 'success'])->name('payment.success');
+    Route::get('/payment/failed', [PaymentController::class, 'failed'])->name('payment.failed');
+    Route::get('/payment/receipt/{order}', [PaymentController::class, 'receipt'])->name('payment.receipt');
 });
 
 /*

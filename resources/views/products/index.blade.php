@@ -197,7 +197,9 @@
                                 @auth
                                     <form method="POST" action="/cart/add/{{ $product->id }}" class="flex-fill">
                                         @csrf
-                                        <button type="submit" class="btn btn-primary btn-sm w-100">Add to Cart</button>
+                                        <button type="submit" class="btn btn-sm w-100 fw-bold" style="background: linear-gradient(135deg, #ba68c8, #ab47bc); color: white; border: none; transition: all 0.3s ease;">
+                                            <i class="fa-solid fa-cart-plus"></i> Add
+                                        </button>
                                     </form>
                                 @endauth
                             </div>
