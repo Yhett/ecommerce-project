@@ -155,7 +155,14 @@ class PaymentController extends Controller
 
         $order->load('items', 'user');
 
-        $pdf = \Barryvdh\DomPDF\Facade\Pdf::loadView('checkout.receipt', compact('order'));
+        // Use the PDF facade if available, otherwise resolve the dompdf wrapper from the container.
+        if (class_exists(\Barryvdh\DomPDF\Facade\Pdf::class)) {
+            $pdf = \Barryvdh\DomPDF\Facade\Pdf::loadView('checkout.receipt', compact('order'));
+        } else {
+            $pdfWrapper = app('dompdf.wrapper');
+            $pdf = $pdfWrapper->loadView('checkout.receipt', compact('order'));
+        }
+
         return $pdf->download('receipt-order-' . $order->id . '.pdf');
     }
 

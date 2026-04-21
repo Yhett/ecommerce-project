@@ -180,7 +180,6 @@
         </div>
 
         <div class="btn-group">
-            <a href="/dashboard" class="btn-primary">View Orders</a>
             <a href="/products" class="btn-secondary">Continue Shopping</a>
             <a href="{{ route('payment.receipt', $order->id) }}" class="btn-success" target="_blank">
                 <i class="fa-solid fa-download"></i> Download e-Receipt

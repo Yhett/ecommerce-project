@@ -1,0 +1,61 @@
+:root{
+    --primary: #ba68c8;
+    --accent: #9c27b0;
+    --dark: #6a1b9a;
+    --light: #f8f9fa;
+    --purple-gradient: linear-gradient(135deg, #ba68c8 0%, #ab47bc 100%);
+}
+
+/* Hero */
+.hero-section{
+    background: var(--purple-gradient);
+    color: white;
+    text-align: center;
+    padding: 4.5rem 0;
+}
+
+.hero-section .display-3{font-size: clamp(2rem, 4.5vw, 3.5rem);}
+.hero-section .lead{opacity: .95}
+
+/* Card lift */
+.hover-lift{transition: transform 0.25s ease, box-shadow 0.25s ease;}
+.hover-lift:hover{transform: translateY(-8px);box-shadow: 0 20px 40px rgba(0,0,0,0.08);}
+
+/* Rounded images */
+.rounded-4{border-radius: .75rem !important}
+
+/* CTA */
+:root{--cta-gradient: linear-gradient(90deg,var(--primary),var(--accent));}
+.btn-cta{background: var(--cta-gradient); color: white; border: none}
+
+/* Utility tweaks */
+.badge[role], .badge{border-radius: .5rem}
+
+/* Stats sizing */
+@media (max-width: 767px){
+    .hero-section{padding: 3rem 0}
+    .hero-section img{height: auto}
+    .display-4{font-size: 1.6rem}
+}
+
+/* Make images responsive and not overflow */
+img.img-fluid{max-width:100%;height:auto}
+
+/* Smooth scroll offset fix for anchored sections when navbar fixed */
+:root{--navbar-offset:70px}
+section[id]{scroll-margin-top: calc(var(--navbar-offset) + 20px)}
+
+/* Make badges subtle */
+.bg-opacity-10{background-color: rgba(0,0,0,0.03) !important}
+
+/* Minor typography */
+.lead{line-height:1.4}
+
+/* Buttons */
+.btn-lg{padding: .85rem 1.6rem}
+
+/* Improve Stats color contrast */
+.bg-primary.bg-opacity-10{background: linear-gradient(90deg, rgba(186,104,200,0.06), rgba(156,39,176,0.04));}
+
+/* Accessibility: focus outlines for keyboard users */
+a:focus, button:focus, input:focus{outline: 3px solid rgba(156,39,176,0.12); outline-offset: 2px}

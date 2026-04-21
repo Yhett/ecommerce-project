@@ -1,14 +1,11 @@
-# Checkout Flow + Shipping Info COMPLETE ✓
+# TODO: Enhance Dashboard UI
 
-**Shipping fields added:**
-- Migration: address, phone columns to users table
-- User model: $fillable updated
-- ProfileUpdateRequest: validation rules
-- Profile edit form: Address + Phone input fields
-- Checkout page: Shipping info displays
+**Current Progress**: 0/4
 
-**Full flow:**
-1. Profile → add shipping address/phone → Save
-2. Cart → Proceed to Checkout → see address in billing section
+## Steps:
+1. [ ] ✅ Create TODO.md
+2. [ ] Improve stats cards (add sales, animate numbers)
+3. [ ] Expand quick actions + add recent orders preview
+4. [ ] Add profile summary + polish responsive design
+5. [ ] Complete + test
 
-Connection + shipping info fully functional. Run `php artisan migrate` if needed.

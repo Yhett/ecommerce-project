@@ -95,13 +95,12 @@
         </div>
         @if($order->user->address)
         <div class="info-row">
-            <span>Address: {{ $order->user->address }}</span>
+            <span>Address: {{ $order->user->address }}</span> <br>
             <span>Phone: {{ $order->user->phone ?? 'N/A' }}</span>
         </div>
         @endif
         <div class="info-row">
             <span>Payment: {{ strtoupper($order->payment_method) }}</span>
-            <span>Status: {{ ucfirst($order->payment_status) }}</span>
         </div>
     </div>
 
@@ -117,7 +116,7 @@
         <tbody>
             @foreach($order->items as $item)
             <tr>
-                <td>{{ $item->product_name }} {{ $item->variation ? '(' . $item->variation . ')' : '' }}</td>
+                <td>{{ $item->product->name ?? $item->product_name }} {{ $item->variation ? '(' . $item->variation . ')' : '' }}</td>
                 <td>{{ $item->quantity }}</td>
                 <td>PHP {{ number_format($item->price, 2) }}</td>
                 <td>PHP {{ number_format($item->price * $item->quantity, 2) }}</td>

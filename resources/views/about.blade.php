@@ -1,5 +1,9 @@
 @extends('layout')
 
+@push('styles')
+    <link rel="stylesheet" href="{{ asset('css/about.css') }}">
+@endpush
+
 @section('content')
 <!-- Hero Section -->
 <section class="hero-section py-5" style="background: linear-gradient(135deg, #ba68c8, #ab47bc); color: white; text-align: center;">
@@ -178,32 +182,7 @@
 </section>
 
 <!-- Stats -->
-<section class="py-5 bg-primary bg-opacity-10">
-    <div class="container">
-        <div class="row text-center g-4">
-            <div class="col-md-3">
-                <i class="fa-solid fa-users fa-4x text-primary mb-3"></i>
-                <h3 class="display-4 fw-bold" style="color: #6a1b9a;">10K+</h3>
-                <p class="h5 fw-semibold text-muted">Satisfied Customers</p>
-            </div>
-            <div class="col-md-3">
-                <i class="fa-solid fa-shirt fa-4x text-primary mb-3"></i>
-                <h3 class="display-4 fw-bold" style="color: #6a1b9a;">5K+</h3>
-                <p class="h5 fw-semibold text-muted">Fashion Items</p>
-            </div>
-            <div class="col-md-3">
-                <i class="fa-solid fa-truck fa-4x text-primary mb-3"></i>
-                <h3 class="display-4 fw-bold" style="color: #6a1b9a;">99%</h3>
-                <p class="h5 fw-semibold text-muted">On-Time Delivery</p>
-            </div>
-            <div class="col-md-3">
-                <i class="fa-solid fa-star fa-4x text-warning mb-3"></i>
-                <h3 class="display-4 fw-bold" style="color: #6a1b9a;">4.9⭐</h3>
-                <p class="h5 fw-semibold text-muted">Average Rating</p>
-            </div>
-        </div>
-    </div>
-</section>
+
 
 <!-- CTA -->
 <section class="py-5" style="background: var(--purple-gradient); color: white; text-align: center;">

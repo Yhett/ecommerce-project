@@ -10,7 +10,7 @@
 
     <style>
         :root {
-            --purple-gradient: linear-gradient(135deg, #ba68c8, #ab47bc);
+            --purple-gradient: linear-gradient(135deg, #cd9cd6, #985aa2);
             --purple-light: linear-gradient(135deg, #f7e8fb 0%, #ffffff 100%);
             --shadow-purple: rgba(156, 39, 176, 0.16);
         }
@@ -37,25 +37,54 @@
             overflow: hidden;
         }
 
-        .hero::before {
-            content: '';
+        /* Bubble Animations */
+        .bubble {
             position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.25) 0%, transparent 50%), 
-                        radial-gradient(circle at 70% 70%, rgba(255,255,255,0.15) 0%, transparent 50%);
-            animation: heroMove 20s linear infinite;
-            z-index: 1;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%, rgba(186, 104, 200, 0.62), rgba(170, 71, 188, 0.55), transparent);
+            pointer-events: none;
+            will-change: transform;
+            box-shadow: 0 0 20px rgba(186, 104, 200, 0.52);
         }
 
-        @keyframes heroMove {
-            0% { transform: translate(0, 0) rotate(0deg); }
-            25% { transform: translate(10%, -10%) rotate(90deg); }
-            50% { transform: translate(-10%, 10%) rotate(180deg); }
-            75% { transform: translate(10%, 10%) rotate(270deg); }
-            100% { transform: translate(0, 0) rotate(360deg); }
+        .bubble-1 { width: 100px; height: 100px; left: 10%; animation: floatUpRight 25s infinite linear; animation-delay: 0s; }
+        .bubble-2 { width: 80px; height: 80px; left: 20%; animation: floatUpLeft 22s infinite linear; animation-delay: 3s; }
+        .bubble-3 { width: 60px; height: 60px; right: 15%; animation: floatUpLeft 18s infinite linear; animation-delay: 1s; }
+        .bubble-4 { width: 120px; height: 120px; left: 70%; animation: floatUpRight 28s infinite linear; animation-delay: 6s; }
+        .bubble-5 { width: 40px; height: 40px; right: 25%; animation: floatUpRight 15s infinite linear; animation-delay: 4s; }
+        .bubble-6 { width: 30px; height: 30px; left: 40%; animation: floatUpLeft 10s infinite linear; animation-delay: 8s; }
+        .bubble-7 { width: 70px; height: 70px; right: 40%; animation: floatDiagonal 20s infinite linear; animation-delay: 2s; }
+        .bubble-8 { width: 50px; height: 50px; left: 80%; animation: floatUpLeft 12s infinite linear; animation-delay: 10s; }
+
+        @keyframes floatUpRight {
+            0% { transform: translateY(100vh) translateX(0) scale(0); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100px) translateX(100px) scale(1.1); opacity: 0; }
+        }
+
+        @keyframes floatUpLeft {
+            0% { transform: translateY(100vh) translateX(0) scale(0); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100px) translateX(-100px) scale(1.1); opacity: 0; }
+        }
+
+        @keyframes floatDiagonal {
+            0% { transform: translateY(100vh) translateX(0) rotate(0deg) scale(0); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-150px) translateX(150px) rotate(360deg) scale(1.2); opacity: 0; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .bubble { animation: none; opacity: 0.3; }
+            .hero .btn-warning { animation: none; }
+        }
+
+        @media (max-width: 768px) {
+            .bubble-1, .bubble-2, .bubble-4 { width: 60px; height: 60px; }
+            .bubble-3, .bubble-5, .bubble-6, .bubble-7, .bubble-8 { width: 30px; height: 30px; }
         }
 
         .hero h1 {
@@ -64,7 +93,7 @@
             margin-bottom: 1rem;
             text-shadow: 0 8px 32px rgba(0,0,0,0.3);
             position: relative;
-            z-index: 2;
+            z-index: 10;
         }
 
         .hero p {
@@ -73,7 +102,7 @@
             opacity: 0.95;
             max-width: 600px;
             position: relative;
-            z-index: 2;
+            z-index: 10;
         }
 
         .hero .btn-warning {
@@ -84,7 +113,7 @@
             box-shadow: 0 16px 48px rgba(255,193,7,0.4);
             transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             position: relative;
-            z-index: 2;
+            z-index: 10;
         }
 
         .hero .btn-warning:hover {
@@ -367,6 +396,16 @@
 @include('components.auth-modals')
 
 <div class="hero">
+    <!-- Bubbles Background -->
+    <div class="bubble bubble-1"></div>
+    <div class="bubble bubble-2"></div>
+    <div class="bubble bubble-3"></div>
+    <div class="bubble bubble-4"></div>
+    <div class="bubble bubble-5"></div>
+    <div class="bubble bubble-6"></div>
+    <div class="bubble bubble-7"></div>
+    <div class="bubble bubble-8"></div>
+    
     <h1 class="animate__animated animate__fadeInDown">Welcome to NextMart</h1>
     <p class="animate__animated animate__fadeInUp animate__delay-1s">Best Online Shopping Experience</p>
     <a href="/products" class="btn btn-warning animate__animated animate__pulse animate__infinite animate__delay-2s">Shop Now</a>

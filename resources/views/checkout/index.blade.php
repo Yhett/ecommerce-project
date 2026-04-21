@@ -346,12 +346,17 @@
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Address</label>
-                        <input type="text" class="form-control" placeholder="123 Main St, City, Country" disabled>
+                        <input type="text" class="form-control" value="{{ $user->address ?: 'Not set - Add in Profile' }}" {{ $user->address ? 'disabled' : '' }}>
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Phone</label>
-                        <input type="tel" class="form-control" placeholder="09xxxxxxxxx" disabled>
+                        <input type="tel" class="form-control" value="{{ $user->phone ?: 'Not set - Add in Profile' }}" {{ $user->phone ? 'disabled' : '' }}>
                     </div>
+                    @if(!$user->address || !$user->phone)
+                        <div class="alert alert-info">
+                            <i class="fas fa-info-circle me-2"></i>Add your address and phone in <a href="{{ route('profile.edit') }}">Profile Settings</a> for faster checkout.
+                        </div>
+                    @endif
                 </div>
             </div>
 

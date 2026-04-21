@@ -218,6 +218,22 @@
                                 @enderror
                             </div>
 
+                            <div class="mb-3">
+                                <label for="address" class="profile-label">Address</label>
+                                <input id="address" name="address" type="text" class="form-control profile-input @error('address') is-invalid @enderror" value="{{ old('address', $user->address) }}" placeholder="123 Main St, City, State, ZIP">
+                                @error('address')
+                                    <div class="text-danger small mt-2">{{ $message }}</div>
+                                @enderror
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="phone" class="profile-label">Phone Number</label>
+                                <input id="phone" name="phone" type="tel" class="form-control profile-input @error('phone') is-invalid @enderror" value="{{ old('phone', $user->phone) }}" placeholder="09xxxxxxxxx">
+                                @error('phone')
+                                    <div class="text-danger small mt-2">{{ $message }}</div>
+                                @enderror
+                            </div>
+
                             <button type="submit" class="btn profile-btn-primary">Save Changes</button>
 
                             @if (session('status') === 'profile-updated')
