@@ -314,53 +314,7 @@
             filter: drop-shadow(0 8px 24px rgba(186, 104, 200, 0.4));
         }
 
-        /* Footer Enhanced */
-        footer {
-            margin-top: 80px;
-            background: var(--purple-gradient);
-            color: white;
-            padding: 4rem 0 2rem;
-            position: relative;
-            overflow: hidden;
-        }
-
-        footer::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-        }
-
-        footer h5 {
-            font-weight: 700;
-            margin-bottom: 1.5rem;
-            position: relative;
-        }
-
-        footer h5::after {
-            content: '';
-            position: absolute;
-            bottom: -8px;
-            left: 0;
-            width: 40px;
-            height: 2px;
-            background: rgba(255,255,255,0.5);
-        }
-
-        footer a {
-            color: rgba(255,255,255,0.8);
-            transition: all 0.3s ease;
-            text-decoration: none;
-        }
-
-        footer a:hover {
-            color: white;
-            transform: translateX(5px);
-        }
-
+        
         /* Responsive */
         @media (max-width: 768px) {
             .featured-slide-image {
@@ -479,10 +433,9 @@
     </div>
 </div>
 
-<footer class="footer">
-    <p>&copy; 2026 NextMart - Premium Shopping Experience</p>
-</footer>
+
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    @include('components.footer')
 </body>
 </html>
