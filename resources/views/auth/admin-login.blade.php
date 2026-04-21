@@ -187,7 +187,7 @@
 
                     <ul>
                         <li><i class="fas fa-chart-line"></i> Monitor store insights and activity</li>
-                        <li><i class="fas fa-box-open"></i> Manage products and featured collections</li>
+                        <li><i class="fas fa-box-open"></i> Manage products and orders</li>
                         <li><i class="fas fa-users"></i> View and maintain registered user accounts</li>
                     </ul>
                 </div>
