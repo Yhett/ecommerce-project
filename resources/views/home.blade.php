@@ -5,183 +5,247 @@
     <title>NextMart - Home</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
     <style>
         body {
-            background: #acc7ac;
+            background: linear-gradient(135deg, #f5f5f5 0%, #e8dff5 100%);
+            background-attachment: fixed;
+            margin: 0;
+            padding: 0;
         }
 
-        .navbar {
-            background: #081303;
-        }
-
-        .navbar-brand {
-            font-weight: bold;
-            color: #fff !important;
-        }
-        .navbar .btn {
-             border-radius: 8px;
-            padding: 5px 12px;
-            font-size: 13px;
-            transition: 0.3s;
-        }
-
-        /* hover effect */
-        .navbar .btn:hover {
-             transform: translateY(-2px);
-        }
         .hero {
-            background: linear-gradient(to right, #111111, #2e492b);
+            background: linear-gradient(135deg, #ba68c8, #ab47bc);
             color: white;
-            padding: 80px 20px;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            flex-direction: column;
+        }
+
+        .featured-section {
+            padding: 2rem 0 1rem;
+        }
+
+        .featured-heading {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .featured-heading h2 {
+            color: #6a1b9a;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+        }
+
+        .featured-heading p {
+            color: #6c757d;
+            max-width: 620px;
+            margin: 0 auto;
+        }
+
+        .featured-carousel {
+            width: 950px;
+            max-width: 100%;
+            margin: 0 auto;
+            border-radius: 28px;
+            overflow: hidden;
+            box-shadow: 0 24px 48px rgba(156, 39, 176, 0.16);
+            background: white;
+        }
+
+        .featured-slide {
+            min-height: 360px;
+            background: linear-gradient(160deg, rgba(255, 255, 255, 0.96), rgba(243, 229, 245, 0.94));
+        }
+
+        .featured-slide-image {
+            height: 460px;
+            width: 360px;
+            object-fit: cover;
+        }
+
+        .featured-slide-image-wrap {
+            height: 100%;
+            min-height: 360px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+        }
+
+        .featured-slide-content {
+            height: 100%;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
             text-align: center;
         }
 
-        .product-card {
-            border: none;
-            transition: 0.3s;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        .featured-slide-content h3 {
+            color: #6a1b9a;
+            font-weight: 700;
+            margin-bottom: 1rem;
         }
 
-        .product-card:hover {
-            transform: translateY(-5px);
+        .featured-slide-content p {
+            color: #6c757d;
+            margin-bottom: 1.25rem;
         }
 
-        .price {
-            color: #28a745;
-            font-weight: bold;
+        .featured-side-list {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 1.5rem;
+            width: 100%;
+            max-width: 320px;
         }
-        .product-icons {
+
+        .featured-side-list li {
+            color: #4b3a57;
+            margin-bottom: 0.8rem;
             display: flex;
-            gap: 15px;
-            justify-content: center;
-            margin-top: 10px;
+            align-items: center;
+            gap: 0.75rem;
         }
 
-        .product-icons i {
-            font-size: 20px;
-            color: #555;
-            cursor: pointer;
-            transition: 0.3s;
-            padding: 10px;
+        .featured-side-list i {
+            color: #9c27b0;
+        }
+
+        .featured-carousel .carousel-inner {
+            border-radius: 28px;
+        }
+
+        .featured-carousel .carousel-indicators [data-bs-target] {
+            width: 12px;
+            height: 12px;
+            margin: 0 6px;
             border-radius: 50%;
-            background: #f2f2f2;
+            background-color: rgba(255, 255, 255, 0.85);
         }
 
-        .product-icons i:hover {
-            color: #fff;
-            background: #e91e63;
-            transform: scale(1.1);
+        .featured-carousel .carousel-control-prev,
+        .featured-carousel .carousel-control-next {
+            width: 12%;
         }
 
-        /* FOOTER */
+        .featured-carousel .carousel-control-prev-icon,
+        .featured-carousel .carousel-control-next-icon {
+            background-color: rgba(0, 0, 0, 0.35);
+            border-radius: 50%;
+            padding: 1.5rem;
+        }
+
         footer {
-             margin-top: 50px;
-            background: #0c1a04;
+            margin-top: 50px;
+            background: linear-gradient(135deg, #ba68c8, #ab47bc);
             color: white;
             padding: 20px;
             text-align: center;
         }
+
+        @media (max-width: 768px) {
+            .featured-slide,
+            .featured-slide-image {
+                min-height: auto;
+                height: 220px;
+            }
+
+            .featured-slide-image-wrap {
+                min-height: auto;
+                padding: 1rem;
+            }
+
+            .featured-slide-content {
+                padding: 1.5rem;
+            }
+        }
     </style>
 </head>
-
 <body>
 
-<!-- NAVBAR -->
-<nav class="navbar navbar-expand-lg navbar-dark px-4">
+@include('components.navbar-home')
+@include('components.auth-modals')
 
-    <a class="navbar-brand" href="#">NextMart</a>
-
-    <div class="ms-auto d-flex align-items-center gap-2">
-
-        <a href="/" class="btn btn-light btn-sm">Home</a>
-
-        <a href="/cart" class="btn btn-warning btn-sm">Cart</a>
-
-        <a href="/login" class="btn btn-outline-light btn-sm">Login</a>
-
-    </div>
-
-</nav>
-
-<!-- HERO -->
 <div class="hero">
     <h1>Welcome to NextMart</h1>
     <p>Best Online Shopping Experience</p>
-    <a href="#products" class="btn btn-warning">Shop Now</a>
+    <a href="/products" class="btn btn-warning">Shop Now</a>
 </div>
 
-<!-- FEATURED PRODUCTS -->
-<div class="container my-5" id="products">
-
-    <h2 class="mb-4"><i class="fa-solid fa-fire"></i> Featured Products</h2>
-
-    <div class="row mb-5">
-        @foreach($products->where('featured', true) as $product)
-        <div class="col-md-3 mb-4">
-
-            <div class="card product-card p-2">
-
-                <img src="{{ $product->image ?? 'https://via.placeholder.com/200' }}"
-                     class="card-img-top">
-
-                <div class="card-body text-center">
-
-                    <span class="badge bg-warning text-dark mb-2">Featured</span>
-
-                    <h5>{{ $product->name }}</h5>
-                    <p class="price">₱{{ $product->price }}</p>
-
-                    <a href="/add-to-cart/{{ $product->id }}"
-                       class="btn btn-primary btn-sm">
-                        Add to Cart
-                    </a>
-
-                </div>
-            </div>
-
-        </div>
-        @endforeach
+<div class="container featured-section my-5" id="products">
+    <div class="featured-heading">
+        <h2><i class="fa-solid fa-fire"></i> Featured Products</h2>
+        <p>Explore our featured collection through an image carousel.</p>
     </div>
 
-    <!-- ALL PRODUCTS -->
-    <h2 class="mb-4"><i class="fa-solid fa-bag-shopping"></i> All Products</h2>
+    @php
+        $featuredImages = [
+            asset('m1.jpg'),
+            asset('m2.jpg'),
+            asset('m3.jpg'),
+            asset('m4.jpg'),
+        ];
+    @endphp
 
-    <div class="row">
-        @foreach($products as $product)
-        <div class="col-md-3 mb-4">
-
-            <div class="card product-card p-2">
-
-                <img src="{{ $product->image ?? 'https://via.placeholder.com/200' }}"
-                     class="card-img-top">
-
-                <div class="card-body text-center">
-
-                    <h5>{{ $product->name }}</h5>
-                    <p class="price">₱{{ $product->price }}</p>
-
-                    <a href="/add-to-cart/{{ $product->id }}"
-                       class="btn btn-primary btn-sm">
-                        Add to Cart
-                    </a>
-
-                </div>
-            </div>
-
+    <div id="featuredProductsCarousel" class="carousel slide featured-carousel" data-bs-ride="carousel" data-bs-interval="4500" data-bs-wrap="true" data-bs-pause="false">
+        <div class="carousel-indicators">
+            @foreach($featuredImages as $index => $featuredImage)
+                <button type="button" data-bs-target="#featuredProductsCarousel" data-bs-slide-to="{{ $index }}" class="{{ $index === 0 ? 'active' : '' }}" {{ $index === 0 ? 'aria-current=true' : '' }} aria-label="Slide {{ $index + 1 }}"></button>
+            @endforeach
         </div>
-        @endforeach
-    </div>
 
+        <div class="carousel-inner">
+            @foreach($featuredImages as $index => $featuredImage)
+                <div class="carousel-item {{ $index === 0 ? 'active' : '' }}">
+                    <div class="featured-slide">
+                        <div class="row g-0 align-items-stretch">
+                            <div class="col-lg-7">
+                                <div class="featured-slide-image-wrap">
+                                    <img src="{{ $featuredImage }}" alt="Featured product image {{ $index + 1 }}" class="featured-slide-image">
+                                </div>
+                            </div>
+                            <div class="col-lg-5">
+                                <div class="featured-slide-content">
+                                    <h3>New Fashion Highlights</h3>
+                                    <p>Browse a rotating selection of styles curated for the season, from everyday essentials to statement looks.</p>
+                                    <ul class="featured-side-list">
+                                        <li><i class="fa-solid fa-check"></i> Dresses and casual styles</li>
+                                        <li><i class="fa-solid fa-check"></i> Men's shirts and polos</li>
+                                        <li><i class="fa-solid fa-check"></i> Women's tops and blouses</li>
+                                        <li><i class="fa-solid fa-check"></i> Denim and jeans collection</li>
+                                    </ul>
+                                    <a href="/products" class="btn btn-warning">View Products</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+
+        <button class="carousel-control-prev" type="button" data-bs-target="#featuredProductsCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#featuredProductsCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
 </div>
 
-<!-- FOOTER -->
 <footer class="footer">
-    <p>© 2026 NextMart - All Rights Reserved</p>
+    <p>&copy; 2026 NextMart - All Rights Reserved</p>
 </footer>
 
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

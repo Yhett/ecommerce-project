@@ -11,6 +11,12 @@ class Product extends Model
         'description',
         'price',
         'stock',
-        'image'
+        'category',
+        'image',
+        'featured',
+    ];
+
+    protected $casts = [
+        'featured' => 'boolean',
     ];
 }
