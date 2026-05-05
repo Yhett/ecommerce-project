@@ -9,19 +9,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
-use Stripe\Exception\CardException;
-use Stripe\Exception\RateLimitException;
-use Stripe\Exception\InvalidRequestException;
-use Stripe\Exception\AuthenticationException;
-use Stripe\Exception\ApiConnectionException;
-use Stripe\Exception\ApiErrorException;
-
 class PaymentController extends Controller
 {
-
     public function __construct()
     {
-
     }
 
     /**
@@ -47,7 +38,6 @@ class PaymentController extends Controller
             'cartItems' => $cartItems,
             'totalAmount' => $totalAmount,
             'user' => $user,
-            'stripePublicKey' => config('services.stripe.public'),
         ]);
     }
 
@@ -69,10 +59,13 @@ class PaymentController extends Controller
             ->get();
 
         if ($cartItems->isEmpty()) {
-            return response()->json([
-                'success' => false,
-                'message' => 'Your cart is empty.',
-            ], 400);
+            if ($request->expectsJson()) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Your cart is empty.',
+                ], 400);
+            }
+            return redirect('/cart')->with('error', 'Your cart is empty.');
         }
 
         $totalAmount = $cartItems->sum(function ($item) {
@@ -90,19 +83,35 @@ class PaymentController extends Controller
                 'total_amount' => $totalAmount,
             ]);
 
-            foreach ($cartItems as $item) {\n   $order->items()->create([\n  'product_id' => $item->product_id,\n  'product_name' => $item->product->name ?? 'Product',\n                    'price' => $item->product->price ?? 0,\n                    'quantity' => $item->quantity ?? 1,\n                    'variation' => $item->variation,\n                ]);\n            }\n\n            // Deduct product stock\n            foreach ($order->items as $orderItem) {\n                $orderItem->product->decrement('stock', $orderItem->quantity);\n            }\n\n            // Create notifications
+            foreach ($cartItems as $item) {
+                $order->items()->create([
+                    'product_id' => $item->product_id,
+                    'product_name' => $item->product->name ?? 'Product',
+                    'price' => $item->product->price ?? 0,
+                    'quantity' => $item->quantity ?? 1,
+                    'variation' => $item->variation,
+                ]);
+            }
+
+            // Deduct product stock if available
+            foreach ($order->items as $orderItem) {
+                if ($orderItem->product) {
+                    $orderItem->product->decrement('stock', $orderItem->quantity);
+                }
+            }
+
+            // Create notifications
             StoreNotification::create([
                 'audience' => 'admin',
-                'title' => 'New Order',
-                'message' => $user->name . ' placed order #' . $order->id . ' via ' . strtoupper($paymentMethod) . ' (PHP ' . number_format($totalAmount, 2) . ')',
+                'title' => 'New Order #' . $order->id,
+                'message' => $user->name . ' placed order via ' . strtoupper($paymentMethod) . ' (PHP ' . number_format($totalAmount, 2) . ')',
                 'type' => 'new_order',
             ]);
 
             StoreNotification::create([
                 'user_id' => $user->id,
-                'audience' => 'user',
-                'title' => 'Order Confirmed',
-                'message' => 'Order #' . $order->id . ' received. Check your email for details.',
+                'title' => 'Order #' . $order->id . ' Confirmed',
+                'message' => 'Thank you for your order! Track status in Orders.',
                 'type' => 'order_confirmed',
             ]);
 
@@ -112,12 +121,18 @@ class PaymentController extends Controller
             return $order;
         });
 
-        return response()->json([
-            'success' => true,
-            'message' => 'Order confirmed! ' . strtoupper($paymentMethod),
-            'order_id' => $order->id,
-            'redirect_url' => route('payment.success', ['order' => $order->id]),
-        ]);
+        $redirectUrl = route('payment.success', $order->id);
+
+        if ($request->expectsJson()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Order placed successfully!',
+                'order_id' => $order->id,
+                'redirect_url' => $redirectUrl,
+            ]);
+        }
+
+        return redirect($redirectUrl)->with('success', 'Order placed successfully!');
     }
 
     /**
@@ -129,7 +144,7 @@ class PaymentController extends Controller
             abort(403);
         }
 
-        $order->load('items', 'user');
+        $order->load('items.product', 'user');
 
         return view('checkout.success', compact('order'));
     }
@@ -143,15 +158,10 @@ class PaymentController extends Controller
             abort(403);
         }
 
-        $order->load('items', 'user');
+        $order->load('items.product', 'user');
 
-        // Use the PDF facade if available, otherwise resolve the dompdf wrapper from the container.
-        if (class_exists(\Barryvdh\DomPDF\Facade\Pdf::class)) {
-            $pdf = \Barryvdh\DomPDF\Facade\Pdf::loadView('checkout.receipt', compact('order'));
-        } else {
-            $pdfWrapper = app('dompdf.wrapper');
-            $pdf = $pdfWrapper->loadView('checkout.receipt', compact('order'));
-        }
+        $pdf = app('dompdf.wrapper');
+        $pdf = $pdf->loadView('checkout.receipt', compact('order'));
 
         return $pdf->download('receipt-order-' . $order->id . '.pdf');
     }
