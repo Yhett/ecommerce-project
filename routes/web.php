@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Models\Product;
+use App\Http\Controllers\ContactController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\PaymentController;
@@ -11,6 +13,7 @@ use App\Http\Controllers\Admin\ProductController as AdminProductController;
 use App\Http\Controllers\Admin\OrderController as AdminOrderController;
 use App\Http\Controllers\AdminLoginController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\MessageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,6 +34,12 @@ Route::get('/', function () {
 Route::get('/about', function () {
     return view('about');
 })->name('about');
+
+Route::get('/contact', function () {
+    return view('contact');
+})->name('contact');
+
+Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
 
 /*
 |--------------------------------------------------------------------------
@@ -64,7 +73,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/cart', [CartController::class, 'index']);
     Route::post('/cart/add/{id}', [CartController::class, 'add']);
     Route::get('/cart/remove/{id}', [CartController::class, 'remove']);
-
 });
 
 /*
@@ -92,6 +100,14 @@ Route::get('/products/{id}', [UserProductController::class, 'show']);
 
 /*
 |--------------------------------------------------------------------------
+| API ROUTES
+|--------------------------------------------------------------------------
+*/
+
+Route::get('/api/contact/{message}', [MessageController::class, 'show']);
+
+/*
+|--------------------------------------------------------------------------
 | ADMIN PANEL
 |--------------------------------------------------------------------------
 */
@@ -113,7 +129,11 @@ Route::prefix('admin')->group(function () {
         Route::resource('users', UserController::class)->only(['index', 'show', 'destroy']);
         Route::get('/orders', [AdminOrderController::class, 'index'])->name('admin.orders.index');
         Route::patch('/orders/{order}', [AdminOrderController::class, 'update'])->name('admin.orders.update');
+        Route::get('/messages', [MessageController::class, 'index'])->name('admin.messages.index');
+        Route::post('/messages/{message}/reply', [MessageController::class, 'reply'])->name('admin.messages.reply');
+        Route::delete('/messages/{message}', [MessageController::class, 'destroy'])->name('admin.messages.destroy');
     });
 });
 
 require __DIR__.'/auth.php';
+

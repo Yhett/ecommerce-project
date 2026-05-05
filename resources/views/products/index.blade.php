@@ -123,6 +123,51 @@
         min-height: 48px;
     }
 
+    .products-toolbar {
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        margin-bottom: 1.75rem;
+    }
+
+    .products-search-form {
+        display: flex;
+        gap: 0.75rem;
+        flex-wrap: wrap;
+        align-items: center;
+    }
+
+    .products-search-input {
+        min-width: min(100%, 320px);
+        border: 1px solid #ead7f1;
+        border-radius: 999px;
+        padding: 0.8rem 1rem;
+        box-shadow: 0 8px 18px rgba(156, 39, 176, 0.06);
+    }
+
+    .products-search-button,
+    .products-search-reset {
+        border-radius: 999px;
+        padding: 0.8rem 1.1rem;
+        font-weight: 600;
+        text-decoration: none;
+    }
+
+    .products-search-button {
+        border: none;
+        color: white;
+        background: linear-gradient(135deg, #ba68c8, #9c27b0);
+        box-shadow: 0 10px 22px rgba(156, 39, 176, 0.18);
+    }
+
+    .products-search-reset {
+        border: 1px solid #ead7f1;
+        color: #6a1b9a;
+        background: white;
+    }
+
     @media (max-width: 767px) {
         .products-hero,
         .products-hero-content {
@@ -153,17 +198,45 @@
         </div>
     </section>
 
-    <div class="products-filter">
-        <a href="/products" class="{{ empty($selectedCategory) ? 'active' : '' }}">All</a>
-        <a href="/products?category=men" class="{{ $selectedCategory === 'men' ? 'active' : '' }}">Men</a>
-        <a href="/products?category=women" class="{{ $selectedCategory === 'women' ? 'active' : '' }}">Women</a>
+    <div class="products-toolbar">
+        <div class="products-filter">
+            <a href="{{ url('/products' . ($search ? '?search=' . urlencode($search) : '')) }}" class="{{ empty($selectedCategory) ? 'active' : '' }}">All</a>
+            <a href="{{ url('/products?category=men' . ($search ? '&search=' . urlencode($search) : '')) }}" class="{{ $selectedCategory === 'men' ? 'active' : '' }}">Men</a>
+            <a href="{{ url('/products?category=women' . ($search ? '&search=' . urlencode($search) : '')) }}" class="{{ $selectedCategory === 'women' ? 'active' : '' }}">Women</a>
+        </div>
+
+        <form method="GET" action="/products" class="products-search-form">
+            @if($selectedCategory)
+                <input type="hidden" name="category" value="{{ $selectedCategory }}">
+            @endif
+
+            <input
+                type="search"
+                name="search"
+                value="{{ $search }}"
+                class="products-search-input"
+                placeholder="Search products..."
+                aria-label="Search products"
+            >
+            <button type="submit" class="products-search-button">Search</button>
+
+            @if($search !== '')
+                <a href="{{ $selectedCategory ? url('/products?category=' . urlencode($selectedCategory)) : url('/products') }}" class="products-search-reset">
+                    Clear
+                </a>
+            @endif
+        </form>
     </div>
 
     @if($products->isEmpty())
         <div class="alert alert-light border text-center py-5">
             <h4 class="mb-2">No products found</h4>
             <p class="text-muted mb-0">
-                @if($selectedCategory)
+                @if($search !== '' && $selectedCategory)
+                    No {{ $selectedCategory }} products matched "{{ $search }}".
+                @elseif($search !== '')
+                    No products matched "{{ $search }}".
+                @elseif($selectedCategory)
                     No {{ $selectedCategory }} products are available yet.
                 @else
                     Add products from the admin panel and they will appear here.

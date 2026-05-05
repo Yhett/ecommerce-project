@@ -411,7 +411,7 @@
                                         <li><i class="fa-solid fa-check"></i> Premium Quality</li>
                                         <li><i class="fa-solid fa-check"></i> Fast Delivery</li>
                                         <li><i class="fa-solid fa-check"></i> Secure Payment</li>
-                                        <li><i class="fa-solid fa-check"></i> Easy Returns</li>
+                                        <li><i class="fa-solid fa-check"></i> Easy Purchase</li>
                                     </ul>
                                     <a href="/products" class="btn btn-warning">Explore Collection</a>
                                 </div>

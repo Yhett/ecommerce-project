@@ -90,17 +90,7 @@ class PaymentController extends Controller
                 'total_amount' => $totalAmount,
             ]);
 
-            foreach ($cartItems as $item) {
-                $order->items()->create([
-                    'product_id' => $item->product_id,
-                    'product_name' => $item->product->name ?? 'Product',
-                    'price' => $item->product->price ?? 0,
-                    'quantity' => $item->quantity ?? 1,
-                    'variation' => $item->variation,
-                ]);
-            }
-
-            // Create notifications
+            foreach ($cartItems as $item) {\n   $order->items()->create([\n  'product_id' => $item->product_id,\n  'product_name' => $item->product->name ?? 'Product',\n                    'price' => $item->product->price ?? 0,\n                    'quantity' => $item->quantity ?? 1,\n                    'variation' => $item->variation,\n                ]);\n            }\n\n            // Deduct product stock\n            foreach ($order->items as $orderItem) {\n                $orderItem->product->decrement('stock', $orderItem->quantity);\n            }\n\n            // Create notifications
             StoreNotification::create([
                 'audience' => 'admin',
                 'title' => 'New Order',
