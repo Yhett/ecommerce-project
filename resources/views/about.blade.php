@@ -2,6 +2,28 @@
 
 @push('styles')
     <link rel="stylesheet" href="{{ asset('css/about.css') }}">
+    <style>
+        html.dark-mode #our-story,
+        html.dark-mode section.bg-white,
+        html.dark-mode section[style*="background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%)"] {
+            background: linear-gradient(135deg, #10131b 0%, #1a1f2c 100%) !important;
+        }
+
+        html.dark-mode .border.rounded-4,
+        html.dark-mode .shadow-sm,
+        html.dark-mode .shadow-lg {
+            background-color: #171b24;
+            border-color: rgba(202, 157, 228, 0.16) !important;
+            color: #ebe6f3;
+        }
+
+        html.dark-mode h2[style],
+        html.dark-mode p[style],
+        html.dark-mode .text-muted,
+        html.dark-mode .lead {
+            color: #c8bed4 !important;
+        }
+    </style>
 @endpush
 
 @section('content')

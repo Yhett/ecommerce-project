@@ -23,68 +23,61 @@
             font-family: system-ui, -apple-system, sans-serif;
         }
 
-        /* Hero with Moving Background */
+        html.dark-mode body {
+            background: linear-gradient(135deg, #0d1017 0%, #1b1122 100%) !important;
+        }
+
+        /* Hero Video Background */
         .hero {
-            background: var(--purple-gradient);
             color: white;
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
-            flex-direction: column;
             position: relative;
             overflow: hidden;
         }
 
-        /* Bubble Animations */
-        .bubble {
+        .hero-video {
             position: absolute;
-            border-radius: 50%;
-            background: radial-gradient(circle at 30% 30%, rgba(186, 104, 200, 0.62), rgba(170, 71, 188, 0.55), transparent);
-            pointer-events: none;
-            will-change: transform;
-            box-shadow: 0 0 20px rgba(186, 104, 200, 0.52);
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
-        .bubble-1 { width: 100px; height: 100px; left: 10%; animation: floatUpRight 25s infinite linear; animation-delay: 0s; }
-        .bubble-2 { width: 80px; height: 80px; left: 20%; animation: floatUpLeft 22s infinite linear; animation-delay: 3s; }
-        .bubble-3 { width: 60px; height: 60px; right: 15%; animation: floatUpLeft 18s infinite linear; animation-delay: 1s; }
-        .bubble-4 { width: 120px; height: 120px; left: 70%; animation: floatUpRight 28s infinite linear; animation-delay: 6s; }
-        .bubble-5 { width: 40px; height: 40px; right: 25%; animation: floatUpRight 15s infinite linear; animation-delay: 4s; }
-        .bubble-6 { width: 30px; height: 30px; left: 40%; animation: floatUpLeft 10s infinite linear; animation-delay: 8s; }
-        .bubble-7 { width: 70px; height: 70px; right: 40%; animation: floatDiagonal 20s infinite linear; animation-delay: 2s; }
-        .bubble-8 { width: 50px; height: 50px; left: 80%; animation: floatUpLeft 12s infinite linear; animation-delay: 10s; }
-
-        @keyframes floatUpRight {
-            0% { transform: translateY(100vh) translateX(0) scale(0); opacity: 0; }
-            10% { opacity: 1; }
-            90% { opacity: 1; }
-            100% { transform: translateY(-100px) translateX(100px) scale(1.1); opacity: 0; }
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background:
+                linear-gradient(135deg, rgba(28, 14, 34, 0.76), rgba(82, 34, 95, 0.42)),
+                linear-gradient(180deg, rgba(0, 0, 0, 0.18), rgba(0, 0, 0, 0.48));
         }
 
-        @keyframes floatUpLeft {
-            0% { transform: translateY(100vh) translateX(0) scale(0); opacity: 0; }
-            10% { opacity: 1; }
-            90% { opacity: 1; }
-            100% { transform: translateY(-100px) translateX(-100px) scale(1.1); opacity: 0; }
-        }
-
-        @keyframes floatDiagonal {
-            0% { transform: translateY(100vh) translateX(0) rotate(0deg) scale(0); opacity: 0; }
-            10% { opacity: 1; }
-            90% { opacity: 1; }
-            100% { transform: translateY(-150px) translateX(150px) rotate(360deg) scale(1.2); opacity: 0; }
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            padding: 2rem;
+            max-width: 760px;
         }
 
         @media (prefers-reduced-motion: reduce) {
-            .bubble { animation: none; opacity: 0.3; }
-            .hero .btn-warning { animation: none; }
-        }
+            .hero-video {
+                display: none;
+            }
 
-        @media (max-width: 768px) {
-            .bubble-1, .bubble-2, .bubble-4 { width: 60px; height: 60px; }
-            .bubble-3, .bubble-5, .bubble-6, .bubble-7, .bubble-8 { width: 30px; height: 30px; }
+            .hero {
+                background: linear-gradient(135deg, #70417f, #29152f);
+            }
+
+            .hero .btn-warning {
+                animation: none;
+            }
         }
 
         .hero h1 {
@@ -92,8 +85,6 @@
             font-weight: 800;
             margin-bottom: 1rem;
             text-shadow: 0 8px 32px rgba(0,0,0,0.3);
-            position: relative;
-            z-index: 10;
         }
 
         .hero p {
@@ -101,8 +92,6 @@
             margin-bottom: 2.5rem;
             opacity: 0.95;
             max-width: 600px;
-            position: relative;
-            z-index: 10;
         }
 
         .hero .btn-warning {
@@ -112,8 +101,6 @@
             border-radius: 50px;
             box-shadow: 0 16px 48px rgba(255,193,7,0.4);
             transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            position: relative;
-            z-index: 10;
         }
 
         .hero .btn-warning:hover {
@@ -125,6 +112,68 @@
         .featured-section {
             padding: 4rem 0 2rem;
             position: relative;
+        }
+
+        .category-section {
+            padding: 5rem 0 1rem;
+        }
+
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 1.5rem;
+        }
+
+        .category-card {
+            display: block;
+            text-decoration: none;
+            color: inherit;
+            background: rgba(255, 255, 255, 0.92);
+            border: 1px solid rgba(234, 216, 244, 0.8);
+            border-radius: 28px;
+            padding: 2rem 1.5rem;
+            box-shadow: 0 20px 48px rgba(156, 39, 176, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+            height: 100%;
+        }
+
+        .category-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 28px 64px rgba(156, 39, 176, 0.18);
+            border-color: rgba(156, 39, 176, 0.35);
+        }
+
+        .category-icon {
+            width: 84px;
+            height: 84px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 24px;
+            margin-bottom: 1.5rem;
+            background: var(--purple-gradient);
+            color: white;
+            font-size: 2rem;
+            box-shadow: 0 16px 32px rgba(156, 39, 176, 0.24);
+        }
+
+        .category-card h3 {
+            color: #6a1b9a;
+            font-weight: 800;
+            margin-bottom: 0.75rem;
+        }
+
+        .category-card p {
+            color: #6c757d;
+            margin-bottom: 1.25rem;
+        }
+
+        .category-link {
+            color: #9c27b0;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
         }
 
         .featured-heading {
@@ -314,9 +363,47 @@
             filter: drop-shadow(0 8px 24px rgba(186, 104, 200, 0.4));
         }
 
+        html.dark-mode .category-card,
+        html.dark-mode .featured-carousel {
+            background: rgba(21, 24, 34, 0.92);
+            border-color: rgba(202, 157, 228, 0.18);
+            box-shadow: 0 24px 56px rgba(0, 0, 0, 0.3);
+        }
+
+        html.dark-mode .featured-slide {
+            background: linear-gradient(135deg, #161824 0%, #26192f 100%);
+        }
+
+        html.dark-mode .featured-heading h2,
+        html.dark-mode .category-card h3,
+        html.dark-mode .featured-slide-content h3,
+        html.dark-mode .featured-side-list li:hover {
+            color: #f1d4ff;
+        }
+
+        html.dark-mode .featured-heading p,
+        html.dark-mode .category-card p,
+        html.dark-mode .featured-slide-content p,
+        html.dark-mode .featured-side-list li {
+            color: #c5bad1;
+        }
+
+        html.dark-mode .category-link,
+        html.dark-mode .featured-side-list i {
+            color: #f3b6ff;
+        }
+
         
         /* Responsive */
         @media (max-width: 768px) {
+            .hero-content {
+                padding: 1.5rem;
+            }
+
+            .category-grid {
+                grid-template-columns: 1fr;
+            }
+
             .featured-slide-image {
                 height: 280px;
                 width: 100%;
@@ -350,19 +437,53 @@
 @include('components.auth-modals')
 
 <div class="hero">
-    <!-- Bubbles Background -->
-    <div class="bubble bubble-1"></div>
-    <div class="bubble bubble-2"></div>
-    <div class="bubble bubble-3"></div>
-    <div class="bubble bubble-4"></div>
-    <div class="bubble bubble-5"></div>
-    <div class="bubble bubble-6"></div>
-    <div class="bubble bubble-7"></div>
-    <div class="bubble bubble-8"></div>
-    
-    <h1 class="animate__animated animate__fadeInDown">Welcome to NextMart</h1>
-    <p class="animate__animated animate__fadeInUp animate__delay-1s">Best Online Shopping Experience</p>
-    <a href="/products" class="btn btn-warning animate__animated animate__pulse animate__infinite animate__delay-2s">Shop Now</a>
+    <video class="hero-video" autoplay muted loop playsinline preload="metadata" poster="{{ asset('hero-poster.jpg') }}">
+        <source src="{{ asset('shop.mp4') }}" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+    <div class="hero-overlay"></div>
+
+    <div class="hero-content">
+        <h1 class="animate__animated animate__fadeInDown">Welcome to NextMart</h1>
+        <p class="animate__animated animate__fadeInUp animate__delay-1s">Best Online Shopping Experience</p>
+        <a href="/products" class="btn btn-warning animate__animated animate__pulse animate__infinite animate__delay-2s">Shop Now</a>
+    </div>
+</div>
+
+<div class="container category-section">
+    <div class="featured-heading">
+        <h2><i class="fa-solid fa-layer-group"></i> Shop by Category</h2>
+        <p>Jump straight into the styles you want and explore products by collection.</p>
+    </div>
+
+    <div class="category-grid">
+        <a href="{{ url('/products?category=women') }}" class="category-card">
+            <div class="category-icon">
+                <i class="fa-solid fa-person-dress"></i>
+            </div>
+            <h3>Women</h3>
+            <p>Discover elegant looks, everyday staples, and standout pieces for every moment.</p>
+            <span class="category-link">Browse Women <i class="fa-solid fa-arrow-right"></i></span>
+        </a>
+
+        <a href="{{ url('/products?category=men') }}" class="category-card">
+            <div class="category-icon">
+                <i class="fa-solid fa-person"></i>
+            </div>
+            <h3>Men</h3>
+            <p>Shop modern essentials, smart casual fits, and wardrobe-ready favorites.</p>
+            <span class="category-link">Browse Men <i class="fa-solid fa-arrow-right"></i></span>
+        </a>
+
+        <a href="{{ url('/products?category=kids') }}" class="category-card">
+            <div class="category-icon">
+                <i class="fa-solid fa-child-reaching"></i>
+            </div>
+            <h3>Kids</h3>
+            <p>Find playful picks, comfy outfits, and fun styles made for active little ones.</p>
+            <span class="category-link">Browse Kids <i class="fa-solid fa-arrow-right"></i></span>
+        </a>
+    </div>
 </div>
 
 <div class="container featured-section my-5" id="products">

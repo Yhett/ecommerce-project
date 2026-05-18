@@ -46,6 +46,20 @@
             pointer-events: none;
             opacity: 0.7;
         }
+
+        html.dark-mode .contact-info-card,
+        html.dark-mode .card {
+            background: #171b24;
+            color: #ebe6f3;
+            box-shadow: 0 18px 40px rgba(0, 0, 0, 0.26);
+        }
+
+        html.dark-mode .contact-info-card .text-muted,
+        html.dark-mode #contact-form .text-muted,
+        html.dark-mode #contact-form h2,
+        html.dark-mode .text-center h3 {
+            color: #c8bed4 !important;
+        }
     </style>
 @endpush
 

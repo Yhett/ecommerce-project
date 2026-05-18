@@ -19,6 +19,7 @@
             <option value="">Select Category</option>
             <option value="men" {{ old('category', $product->category) === 'men' ? 'selected' : '' }}>Men</option>
             <option value="women" {{ old('category', $product->category) === 'women' ? 'selected' : '' }}>Women</option>
+            <option value="kids" {{ old('category', $product->category) === 'kids' ? 'selected' : '' }}>Kids</option>
         </select>
         <textarea name="description">{{ old('description', $product->description) }}</textarea>
         <input type="file" name="image">

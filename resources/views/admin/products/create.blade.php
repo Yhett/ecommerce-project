@@ -18,6 +18,7 @@
             <option value="">Select Category</option>
             <option value="men" {{ old('category') === 'men' ? 'selected' : '' }}>Men</option>
             <option value="women" {{ old('category') === 'women' ? 'selected' : '' }}>Women</option>
+            <option value="kids" {{ old('category') === 'kids' ? 'selected' : '' }}>Kids</option>
         </select>
         <textarea name="description" placeholder="Description">{{ old('description') }}</textarea>
         <input type="file" name="image">

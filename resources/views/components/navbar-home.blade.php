@@ -1,3 +1,12 @@
+<script>
+    (function () {
+        const savedTheme = localStorage.getItem('nextmart-theme');
+        if (savedTheme === 'dark') {
+            document.documentElement.classList.add('dark-mode');
+        }
+    })();
+</script>
+
 <style>
     :root {
         --primary: #ba68c8;
@@ -241,6 +250,108 @@
         color: var(--accent);
     }
 
+    .theme-toggle {
+        border: 2px solid var(--light-border);
+    }
+
+    .theme-toggle-icon-sun {
+        display: none;
+    }
+
+    html.dark-mode .theme-toggle-icon-moon {
+        display: none;
+    }
+
+    html.dark-mode .theme-toggle-icon-sun {
+        display: inline-block;
+    }
+
+    html.dark-mode body {
+        background: #0f1117 !important;
+        color: #ebe6f3;
+    }
+
+    html.dark-mode .navbar-home {
+        background: linear-gradient(135deg, rgba(22, 24, 33, 0.98) 0%, rgba(32, 21, 42, 0.96) 100%);
+        border-bottom-color: rgba(164, 114, 194, 0.28);
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+    }
+
+    html.dark-mode .navbar-brand-home,
+    html.dark-mode .navbar-link {
+        color: #f3eafb !important;
+    }
+
+    html.dark-mode .navbar-link:hover,
+    html.dark-mode .navbar-link.active {
+        color: #f3b6ff !important;
+    }
+
+    html.dark-mode .navbar-icon,
+    html.dark-mode .navbar-toggle {
+        background: rgba(255, 255, 255, 0.06);
+        border-color: rgba(202, 157, 228, 0.28);
+        color: #f3eafb;
+    }
+
+    html.dark-mode .navbar-icon:hover,
+    html.dark-mode .navbar-toggle:hover {
+        background: linear-gradient(135deg, var(--primary), var(--accent));
+        border-color: transparent;
+        color: white;
+    }
+
+    html.dark-mode .container,
+    html.dark-mode .card,
+    html.dark-mode .alert,
+    html.dark-mode .modal-content,
+    html.dark-mode .dropdown-menu {
+        color: #ebe6f3;
+    }
+
+    html.dark-mode .bg-white,
+    html.dark-mode .card,
+    html.dark-mode .modal-content,
+    html.dark-mode .dropdown-menu,
+    html.dark-mode .alert-light {
+        background-color: #171b24 !important;
+        border-color: rgba(202, 157, 228, 0.16) !important;
+    }
+
+    html.dark-mode .bg-light {
+        background-color: #12161f !important;
+    }
+
+    html.dark-mode .text-muted,
+    html.dark-mode .lead,
+    html.dark-mode .form-floating label,
+    html.dark-mode .opacity-75 {
+        color: #b8abc7 !important;
+    }
+
+    html.dark-mode input,
+    html.dark-mode textarea,
+    html.dark-mode select {
+        background: #0f141c !important;
+        color: #f4eff9 !important;
+        border-color: rgba(202, 157, 228, 0.2) !important;
+    }
+
+    html.dark-mode input::placeholder,
+    html.dark-mode textarea::placeholder {
+        color: #887b96 !important;
+    }
+
+    html.dark-mode .btn-outline-dark {
+        color: #ebe6f3;
+        border-color: rgba(202, 157, 228, 0.32);
+    }
+
+    html.dark-mode .btn-outline-dark:hover {
+        background: #ebe6f3;
+        color: #161616;
+    }
+
     /* Button Styles */
     .btn-nav {
         padding: 8px 18px;
@@ -373,10 +484,7 @@
             <span>NextMart</span>
         </a>
 
-        <!-- Search Bar -->
-        <div class="navbar-search">
-            <input type="text" placeholder="Search products...">
-        </div>
+
 
         <!-- Navigation Links -->
         <ul class="navbar-links">
@@ -390,6 +498,11 @@
 
         <!-- Navbar Icons -->
         <div class="navbar-icons">
+            <button type="button" class="navbar-icon theme-toggle" id="themeToggle" title="Toggle dark mode" aria-label="Toggle dark mode">
+                <i class="fas fa-moon theme-toggle-icon-moon"></i>
+                <i class="fas fa-sun theme-toggle-icon-sun"></i>
+            </button>
+
             <!-- Notifications -->
             <a href="/notifications" class="navbar-icon" title="Order Updates">
                 <i class="fas fa-bell"></i>
@@ -473,5 +586,22 @@
     navbarToggle.addEventListener('click', function() {
         // Add mobile menu functionality here
         alert('Mobile menu - coming soon!');
+    });
+
+    const themeToggle = document.getElementById('themeToggle');
+    const rootElement = document.documentElement;
+
+    const updateThemeToggleTitle = () => {
+        const isDarkMode = rootElement.classList.contains('dark-mode');
+        themeToggle.setAttribute('title', isDarkMode ? 'Switch to light mode' : 'Switch to dark mode');
+        themeToggle.setAttribute('aria-label', isDarkMode ? 'Switch to light mode' : 'Switch to dark mode');
+    };
+
+    updateThemeToggleTitle();
+
+    themeToggle.addEventListener('click', function() {
+        rootElement.classList.toggle('dark-mode');
+        localStorage.setItem('nextmart-theme', rootElement.classList.contains('dark-mode') ? 'dark' : 'light');
+        updateThemeToggleTitle();
     });
 </script>

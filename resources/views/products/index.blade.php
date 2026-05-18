@@ -6,13 +6,17 @@
         padding-bottom: 3rem;
     }
 
+    html.dark-mode .products-page {
+        color: #ebe6f3;
+    }
+
     .products-hero {
         position: relative;
         border-radius: 24px;
-        min-height: 420px;
+        min-height: 520px;
         margin-bottom: 2rem;
         overflow: hidden;
-        box-shadow: 0 18px 40px rgba(156, 39, 176, 0.18);
+        box-shadow: 0 18px 40px rgba(155, 39, 176, 0.1);
         background: #120818;
     }
 
@@ -27,7 +31,7 @@
     .products-hero-overlay {
         position: absolute;
         inset: 0;
-        background: linear-gradient(135deg, rgba(33, 10, 46, 0.78), rgba(124, 36, 143, 0.52));
+        background: linear-gradient(135deg, rgba(33, 10, 46, 0.66), rgba(123, 36, 143, 0.27));
     }
 
     .products-hero-content {
@@ -129,30 +133,68 @@
         align-items: center;
         justify-content: space-between;
         flex-wrap: wrap;
+        position: sticky;
+        top: 59px;
+        z-index: 950;
+        padding: 1rem 1.1rem;
+        border-radius: 28px;
+        background: rgba(212, 182, 236, 0.61);
+        border: 1px solid rgba(111, 83, 122, 0.95);
+        backdrop-filter: blur(14px);
+        box-shadow: 0 16px 38px rgba(156, 39, 176, 0.1);
         margin-bottom: 1.75rem;
     }
 
     .products-search-form {
         display: flex;
         gap: 0.75rem;
-        flex-wrap: wrap;
         align-items: center;
+        justify-content: space-between;
+        padding: 0.5rem;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.92);
+        border: 1px solid #ead7f1;
+        box-shadow: 0 14px 34px rgba(156, 39, 176, 0.08);
+        min-width: min(100%, 470px);
+    }
+
+    .products-search-field {
+        display: flex;
+        align-items: center;
+        gap: 0.85rem;
+        flex: 1 1 auto;
+        min-width: 0;
+        padding: 0 0.85rem;
+    }
+
+    .products-search-icon {
+        color: #9c27b0;
+        font-size: 0.95rem;
+        flex-shrink: 0;
     }
 
     .products-search-input {
-        min-width: min(100%, 320px);
-        border: 1px solid #ead7f1;
-        border-radius: 999px;
-        padding: 0.8rem 1rem;
-        box-shadow: 0 8px 18px rgba(156, 39, 176, 0.06);
+        width: 100%;
+        min-width: 0;
+        border: none;
+        background: transparent;
+        padding: 0.8rem 0;
+        color: #4b3a57;
+        outline: none;
+    }
+
+    .products-search-input::placeholder {
+        color: #9a8aa3;
     }
 
     .products-search-button,
     .products-search-reset {
         border-radius: 999px;
-        padding: 0.8rem 1.1rem;
+        padding: 0.85rem 1.2rem;
         font-weight: 600;
         text-decoration: none;
+        white-space: nowrap;
+        transition: all 0.2s ease;
     }
 
     .products-search-button {
@@ -162,10 +204,61 @@
         box-shadow: 0 10px 22px rgba(156, 39, 176, 0.18);
     }
 
+    .products-search-button:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 14px 24px rgba(156, 39, 176, 0.22);
+    }
+
     .products-search-reset {
         border: 1px solid #ead7f1;
         color: #6a1b9a;
         background: white;
+    }
+
+    .products-search-reset:hover {
+        border-color: #d7b9e6;
+        background: #faf5fc;
+    }
+
+    .products-search-form:focus-within {
+        border-color: rgba(156, 39, 176, 0.35);
+        box-shadow: 0 18px 36px rgba(156, 39, 176, 0.14);
+    }
+
+    html.dark-mode .products-toolbar {
+        background: rgba(23, 26, 36, 0.9);
+        border-color: rgba(202, 157, 228, 0.18);
+        box-shadow: 0 16px 38px rgba(0, 0, 0, 0.32);
+    }
+
+    html.dark-mode .products-filter a,
+    html.dark-mode .products-search-form {
+        background: rgba(16, 20, 29, 0.92);
+        border-color: rgba(202, 157, 228, 0.18);
+        color: #f0e5fa;
+    }
+
+    html.dark-mode .products-search-input {
+        color: #f0e5fa;
+    }
+
+    html.dark-mode .products-search-input::placeholder {
+        color: #8e84a0;
+    }
+
+    html.dark-mode .products-search-reset {
+        background: rgba(255, 255, 255, 0.04);
+        color: #f0e5fa;
+    }
+
+    html.dark-mode .products-grid-card {
+        background: #171b24;
+        border-color: rgba(202, 157, 228, 0.16);
+        box-shadow: 0 16px 32px rgba(0, 0, 0, 0.24);
+    }
+
+    html.dark-mode .product-description {
+        color: #b8abc7;
     }
 
     @media (max-width: 767px) {
@@ -177,12 +270,36 @@
         .products-hero-content {
             padding: 2rem 1.25rem;
         }
+
+        .products-toolbar {
+            top: 76px;
+            padding: 0.9rem;
+            border-radius: 24px;
+        }
+
+        .products-search-form {
+            min-width: 100%;
+            border-radius: 24px;
+            flex-wrap: wrap;
+            padding: 0.85rem;
+        }
+
+        .products-search-field {
+            width: 100%;
+            padding: 0 0.35rem;
+        }
+
+        .products-search-button,
+        .products-search-reset {
+            flex: 1 1 calc(50% - 0.375rem);
+            text-align: center;
+        }
     }
 </style>
 <div class="products-page">
     <section class="products-hero">
         <video class="products-hero-video" autoplay muted loop playsinline preload="auto" poster="https://via.placeholder.com/1200x500?text=NextMart+Products">
-            <source src="{{ asset('vid.mp4') }}" type="video/mp4">
+            <source src="{{ asset('sh.mp4') }}" type="video/mp4">
             Your browser does not support the video tag.
         </video>
         <div class="products-hero-overlay"></div>
@@ -203,6 +320,7 @@
             <a href="{{ url('/products' . ($search ? '?search=' . urlencode($search) : '')) }}" class="{{ empty($selectedCategory) ? 'active' : '' }}">All</a>
             <a href="{{ url('/products?category=men' . ($search ? '&search=' . urlencode($search) : '')) }}" class="{{ $selectedCategory === 'men' ? 'active' : '' }}">Men</a>
             <a href="{{ url('/products?category=women' . ($search ? '&search=' . urlencode($search) : '')) }}" class="{{ $selectedCategory === 'women' ? 'active' : '' }}">Women</a>
+            <a href="{{ url('/products?category=kids' . ($search ? '&search=' . urlencode($search) : '')) }}" class="{{ $selectedCategory === 'kids' ? 'active' : '' }}">Kids</a>
         </div>
 
         <form method="GET" action="/products" class="products-search-form">
@@ -210,14 +328,17 @@
                 <input type="hidden" name="category" value="{{ $selectedCategory }}">
             @endif
 
-            <input
-                type="search"
-                name="search"
-                value="{{ $search }}"
-                class="products-search-input"
-                placeholder="Search products..."
-                aria-label="Search products"
-            >
+            <div class="products-search-field">
+                <i class="fa-solid fa-magnifying-glass products-search-icon" aria-hidden="true"></i>
+                <input
+                    type="search"
+                    name="search"
+                    value="{{ $search }}"
+                    class="products-search-input"
+                    placeholder="Search products, styles, or category"
+                    aria-label="Search products"
+                >
+            </div>
             <button type="submit" class="products-search-button">Search</button>
 
             @if($search !== '')

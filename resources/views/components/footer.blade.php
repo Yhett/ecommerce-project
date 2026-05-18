@@ -27,10 +27,7 @@
       <div class="col-lg-2 col-md-6 mb-4">
         <h6 class="mb-3">Customer Service</h6>
         <ul class="list-unstyled">
-          <li><a href="#" class="text-light text-decoration-none opacity-75 hover-primary">Help Center</a></li>
-          <li><a href="#" class="text-light text-decoration-none opacity-75 hover-primary">Track Order</a></li>
-          <li><a href="#" class="text-light text-decoration-none opacity-75 hover-primary">Returns</a></li>
-          <li><a href="#" class="text-light text-decoration-none opacity-75 hover-primary">Contact</a></li>
+          <li><a href="{{ route('contact') }}" class="text-light text-decoration-none opacity-75 hover-primary">Contact</a></li>
         </ul>
       </div>
       <div class="col-lg-4 mb-4">

@@ -11,9 +11,10 @@ class ProductController extends Controller
     {
         $selectedCategory = request('category');
         $search = trim((string) request('search'));
+        $allowedCategories = ['men', 'women', 'kids'];
 
         $products = Product::query()
-            ->when(in_array($selectedCategory, ['men', 'women']), function ($query) use ($selectedCategory) {
+            ->when(in_array($selectedCategory, $allowedCategories), function ($query) use ($selectedCategory) {
                 $query->where('category', $selectedCategory);
             })
             ->when($search !== '', function ($query) use ($search) {
