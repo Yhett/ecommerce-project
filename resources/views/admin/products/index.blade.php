@@ -24,7 +24,6 @@
                 <th>Category</th>
                 <th>Price</th>
                 <th>Stock</th>
-                <th>Featured</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -35,7 +34,6 @@
                     <td>{{ $p->category ? ucfirst($p->category) : 'Uncategorized' }}</td>
                     <td>PHP {{ number_format($p->price, 2) }}</td>
                     <td>{{ $p->stock }}</td>
-                    <td>{{ $p->featured ? 'Yes' : 'No' }}</td>
                     <td>
                         <div class="table-actions">
                             <a href="/admin/products/{{ $p->id }}/edit" class="btn btn-secondary">Edit</a>
