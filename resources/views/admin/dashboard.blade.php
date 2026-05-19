@@ -91,42 +91,10 @@
     </div>
 </div>
 
-<div class="dashboard-grid">
-    <div class="card">
-        <div class="page-title" style="font-size:1.35rem;">Quick Actions</div>
-        <div class="page-subtitle">Jump into the most common admin tasks.</div>
 
-        <div class="quick-actions">
-            <a href="/admin/products" class="btn">Manage Products</a>
-            <a href="/admin/products/create" class="btn">Add Product</a>
-            <a href="/admin/users" class="btn btn-secondary">View Users</a>
-            <a href="/admin/orders" class="btn btn-secondary">Manage Orders</a>
-        </div>
-    </div>
-
-    <div class="card">
-        <div class="page-title" style="font-size:1.35rem;">Store Insights</div>
-        <div class="page-subtitle">A simple summary of current admin data.</div>
-
-        <div class="insight-list">
-            <div class="insight-item">
-                <strong>{{ $featuredProducts }}</strong>
-                Featured items are currently highlighted in the storefront.
-            </div>
-            <div class="insight-item">
-                <strong>{{ $totalUsers }}</strong>
-                Registered users can browse, manage profiles, and receive updates.
-            </div>
-            <div class="insight-item">
-                <strong>{{ $totalCartItems }}</strong>
-                Items are currently sitting in customer carts.
-            </div>
-        </div>
-    </div>
-</div>
 
 <div class="card" style="margin-top: 1rem;">
-    <div class="page-title" style="font-size:1.35rem;">Recent Admin Notifications</div>
+    <div class="page-title" style="font-size:1.35rem;">Recent Notifications</div>
     <div class="page-subtitle">Updates triggered by cart activity and new customer orders.</div>
 
     @forelse($recentNotifications as $notification)
